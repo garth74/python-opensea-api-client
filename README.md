@@ -19,31 +19,32 @@ from opensea_api_client import AuthenticatedClient
 
 client = AuthenticatedClient(base_url="https://api.opensea.io", token="SuperSecretToken")
 ```
+
 A token can be created by applying for developer access (see [OpenSea Developer Docs](https://docs.opensea.io/) for more information).
 
 Now call your endpoint and use your models:
 
 ```python
-from opensea_api_client.models import MyDataModel
-from opensea_api_client.api.my_tag import get_my_data_model
+from opensea_api_client.models import ListCollectionsResponse
+from opensea_api_client.api.nft_endpoints import list_collections
 from opensea_api_client.types import Response
 
 with client as client:
-    my_data: MyDataModel = get_my_data_model.sync(client=client)
+    my_data: ListCollectionsResponse = list_collections.sync(client=client)
     # or if you need more info (e.g., status_code)
-    response: Response[MyDataModel] = get_my_data_model.sync_detailed(client=client)
+    response: Response[ListCollectionsResponse] = list_collections.sync_detailed(client=client)
 ```
 
 Or do the same thing with an async version:
 
 ```python
-from opensea_api_client.models import MyDataModel
-from opensea_api_client.api.my_tag import get_my_data_model
+from opensea_api_client.models import ListCollectionsResponse
+from opensea_api_client.api.nft_endpoints import list_collections
 from opensea_api_client.types import Response
 
 async with client as client:
-    my_data: MyDataModel = await get_my_data_model.asyncio(client=client)
-    response: Response[MyDataModel] = await get_my_data_model.asyncio_detailed(client=client)
+    my_data: ListCollectionsResponse = await get_my_data_model.asyncio(client=client)
+    response: Response[ListCollectionsResponse] = await get_my_data_model.asyncio_detailed(client=client)
 ```
 
 By default, when you call an HTTPS API, it will attempt to verify that SSL is working correctly. Using certificate verification is highly recommended most of the time, but sometimes, you may need to authenticate to a server (especially an internal server) using a custom certificate bundle.
@@ -110,20 +111,3 @@ client = Client(base_url="https://api.opensea.io")
 # Note that base_url needs to be re-set, as would any shared cookies, headers, etc.
 client.set_httpx_client(httpx.Client(base_url="https://api.opensea.io", proxies="http://localhost:8030"))
 ```
-
-## Building / publishing this package
-
-This project uses [Poetry](https://python-poetry.org/) to manage dependencies  and packaging.  Here are the basics:
-
-1. Update the metadata in pyproject.toml (e.g. authors, version)
-1. If you're using a private repository, configure it with Poetry
-    1. `poetry config repositories.<your-repository-name> <url-to-your-repository>`
-    1. `poetry config http-basic.<your-repository-name> <username> <password>`
-1. Publish the client with `poetry publish --build -r <your-repository-name>` or, if for public PyPI, just `poetry publish --build`
-
-If you want to install this client into another project without publishing it (e.g. for development) then:
-
-1. If that project **is using Poetry**, you can simply do `poetry add <path-to-this-client>` from that project
-1. If that project is not using Poetry:
-    1. Build a wheel with `poetry build -f wheel`
-    1. Install that wheel from the other project `pip install <path-to-wheel>`
