@@ -1,6 +1,17 @@
 # opensea-api-client
 
-This is a client library for accessing the [OpenSea](https://opensea.io) API. This package is not affiliated with OpenSea.
+This is a client library for accessing the [OpenSea](https://opensea.io) API. This package is not affiliated with
+OpenSea. Additionally, this package was created using the [Python OpenAPI](https://github.com/openapi-generators/openapi-python-client).
+
+Things to know:
+
+1. Every path/method combo becomes a Python module with four functions:
+    1. `sync`: Blocking request that returns parsed data (if successful) or `None`.
+    1. `sync_detailed`: Blocking request that always returns a `Response`, optionally with `parsed` set if the request was successful.
+    1. `asyncio`: Like `sync` but async instead of blocking.
+    1. `asyncio_detailed`: Like `sync_detailed` but async instead of blocking.
+
+1. All path/query params, and bodies become are method arguments.
 
 ## Usage
 
@@ -70,16 +81,6 @@ client = AuthenticatedClient(
     verify_ssl=False,
 )
 ```
-
-Things to know:
-
-1. Every path/method combo becomes a Python module with four functions:
-    1. `sync`: Blocking request that returns parsed data (if successful) or `None`.
-    1. `sync_detailed`: Blocking request that always returns a `Response`, optionally with `parsed` set if the request was successful.
-    1. `asyncio`: Like `sync` but async instead of blocking.
-    1. `asyncio_detailed`: Like `sync_detailed` but async instead of blocking.
-
-1. All path/query params, and bodies become are method arguments.
 
 ## Advanced customizations
 
