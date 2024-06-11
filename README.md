@@ -1,6 +1,6 @@
-# open-sea-api-client
+# opensea-api-client
 
-A client library for accessing OpenSea API
+This is a client library for accessing the [OpenSea](https://opensea.io) API. This package is not affiliated with OpenSea.
 
 ## Usage
 
@@ -12,13 +12,14 @@ from opensea_api_client import Client
 client = Client(base_url="https://api.opensea.io")
 ```
 
-If the endpoints you're going to hit require authentication, use `AuthenticatedClient` instead:
+If the endpoints you're going to access require authentication, use `AuthenticatedClient` instead:
 
 ```python
 from opensea_api_client import AuthenticatedClient
 
 client = AuthenticatedClient(base_url="https://api.opensea.io", token="SuperSecretToken")
 ```
+A token can be created by applying for developer access (see [OpenSea Developer Docs](https://docs.opensea.io/) for more information).
 
 Now call your endpoint and use your models:
 
@@ -29,7 +30,7 @@ from opensea_api_client.types import Response
 
 with client as client:
     my_data: MyDataModel = get_my_data_model.sync(client=client)
-    # or if you need more info (e.g. status_code)
+    # or if you need more info (e.g., status_code)
     response: Response[MyDataModel] = get_my_data_model.sync_detailed(client=client)
 ```
 
@@ -45,7 +46,7 @@ async with client as client:
     response: Response[MyDataModel] = await get_my_data_model.asyncio_detailed(client=client)
 ```
 
-By default, when you're calling an HTTPS API it will attempt to verify that SSL is working correctly. Using certificate verification is highly recommended most of the time, but sometimes you may need to authenticate to a server (especially an internal server) using a custom certificate bundle.
+By default, when you call an HTTPS API, it will attempt to verify that SSL is working correctly. Using certificate verification is highly recommended most of the time, but sometimes, you may need to authenticate to a server (especially an internal server) using a custom certificate bundle.
 
 ```python
 client = AuthenticatedClient(
@@ -79,7 +80,7 @@ Things to know:
 
 ## Advanced customizations
 
-There are more settings on the generated `Client` class which let you control more runtime behavior, check out the docstring on that class for more info. You can also customize the underlying `httpx.Client` or `httpx.AsyncClient` (depending on your use-case):
+There are more settings on the generated `Client` class, which let you control more runtime behavior; check out the docstring on that class for more info. You can also customize the underlying `httpx.Client` or `httpx.AsyncClient` (depending on your use case):
 
 ```python
 from opensea_api_client import Client
