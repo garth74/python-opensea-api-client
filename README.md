@@ -1,7 +1,6 @@
 # opensea-api-client
 
-This is a client library for accessing the [OpenSea](https://opensea.io) API. This package is not affiliated with
-OpenSea. Additionally, this package was created using the [Python OpenAPI](https://github.com/openapi-generators/openapi-python-client).
+This package was created using the [Python OpenAPI](https://github.com/openapi-generators/openapi-python-client) for accessing the [OpenSea](https://opensea.io) API. This package is not affiliated with OpenSea.
 
 Things to know:
 
