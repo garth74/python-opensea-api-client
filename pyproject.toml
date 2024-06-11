@@ -1,11 +1,12 @@
 [tool.poetry]
-name = "open-sea-api-client"
+name = "opensea-api-client"
 version = "2.0.0"
 description = "A client library for accessing OpenSea API"
+license = "MIT License"
 authors = ["Garrett Shipley <garrett.shipley7@gmail.com>"]
 readme = "README.md"
-packages = [{ include = "open_sea_api_client" }]
-include = ["CHANGELOG.md", "open_sea_api_client/py.typed"]
+packages = [{ include = "opensea_api_client" }]
+include = ["CHANGELOG.md", "opensea_api_client/py.typed"]
 
 
 [tool.poetry.dependencies]
