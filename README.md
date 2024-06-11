@@ -17,10 +17,14 @@ If the endpoints you're going to access require authentication, use `Authenticat
 ```python
 from opensea_api_client import AuthenticatedClient
 
-client = AuthenticatedClient(base_url="https://api.opensea.io", token="SuperSecretToken")
+client = AuthenticatedClient(
+    base_url="https://api.opensea.io",
+    token="SuperSecretToken"
+)
 ```
 
-A token can be created by applying for developer access (see [OpenSea Developer Docs](https://docs.opensea.io/) for more information).
+A token can be created by applying for developer access (see [OpenSea Developer Docs](https://docs.opensea.io/) for more
+information).
 
 Now call your endpoint and use your models:
 
@@ -63,25 +67,25 @@ You can also disable certificate validation altogether, but beware that **this i
 client = AuthenticatedClient(
     base_url="https://api.opensea.io", 
     token="SuperSecretToken", 
-    verify_ssl=False
+    verify_ssl=False,
 )
 ```
 
 Things to know:
 
 1. Every path/method combo becomes a Python module with four functions:
-    1. `sync`: Blocking request that returns parsed data (if successful) or `None`
-    1. `sync_detailed`: Blocking request that always returns a `Request`, optionally with `parsed` set if the request was successful.
-    1. `asyncio`: Like `sync` but async instead of blocking
-    1. `asyncio_detailed`: Like `sync_detailed` but async instead of blocking
+    1. `sync`: Blocking request that returns parsed data (if successful) or `None`.
+    1. `sync_detailed`: Blocking request that always returns a `Response`, optionally with `parsed` set if the request was successful.
+    1. `asyncio`: Like `sync` but async instead of blocking.
+    1. `asyncio_detailed`: Like `sync_detailed` but async instead of blocking.
 
-1. All path/query params, and bodies become method arguments.
-1. If your endpoint had any tags on it, the first tag will be used as a module name for the function (my_tag above)
-1. Any endpoint which did not have a tag will be in `opensea_api_client.api.default`
+1. All path/query params, and bodies become are method arguments.
 
 ## Advanced customizations
 
-There are more settings on the generated `Client` class, which let you control more runtime behavior; check out the docstring on that class for more info. You can also customize the underlying `httpx.Client` or `httpx.AsyncClient` (depending on your use case):
+There are more settings on the generated `Client` class, which let you control more runtime behavior; check out the
+docstring on that class for more info. You can also customize the  underlying `httpx.Client` or `httpx.AsyncClient`
+(depending on your use case):
 
 ```python
 from opensea_api_client import Client
